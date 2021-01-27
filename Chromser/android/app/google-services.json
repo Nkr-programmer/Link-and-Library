@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "281283958415",
+    "firebase_url": "https://chromser-d72db.firebaseio.com",
+    "project_id": "chromser-d72db",
+    "storage_bucket": "chromser-d72db.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:281283958415:android:e410e007ac4216982a82fa",
+        "android_client_info": {
+          "package_name": "com.example.Chromser"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "281283958415-507jm533l8fmn1v34160o8gkkd7n5m99.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.Chromser",
+            "certificate_hash": "7ec17ea100d5c281b22d11420f76e5e825815e56"
+          }
+        },
+        {
+          "client_id": "281283958415-9tgltur3969d5smkp9f5cgl9q6ep4e86.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA3jokcD6H7l9FVe56w1uE9W2s2J4dgKW0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "281283958415-9tgltur3969d5smkp9f5cgl9q6ep4e86.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
