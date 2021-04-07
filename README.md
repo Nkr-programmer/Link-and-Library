@@ -1,4 +1,10 @@
-# Link AND Library
+# Flutter Link AND Library
+Building a Link AND Library in Flutter.
+
+Show some ❤️ and star the repo to support the project
+Screenshots
+
+
 This project is based on easy access to multiple apps and has a library
 which could be private, public or one to one end. With Google
 SignIn,Crud Operations on Firebase, Text Image Books can be
