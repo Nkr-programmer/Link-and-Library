@@ -22,7 +22,7 @@ Screenshots
 <img src="https://user-images.githubusercontent.com/55958579/114073570-11392580-98c1-11eb-8f52-92cd89d320b3.jpg" width="300px" height="600px" />
 <img src="https://user-images.githubusercontent.com/55958579/114073608-1ac28d80-98c1-11eb-9aa4-d2f248e54251.jpg" width="300px" height="600px">
 </p>
-<img src="https://user-images.githubusercontent.com/55958579/114073672-2a41d680-98c1-11eb-8678-c08960cf9020.jpg" width="300px" height="600px">
+<img src="https://user-images.githubusercontent.com/55958579/114073672-2a41d680-98c1-11eb-8678-c08960cf9020.jpg" width="300px" height="600px" >
 
 This project is based on easy access to multiple apps and has a library
 which could be private, public or one to one end. With Google
