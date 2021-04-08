@@ -3,8 +3,8 @@ Building a Link AND Library in Flutter.
 
 Show some ❤️ and star the repo to support the project
 Screenshots
-![7](https://user-images.githubusercontent.com/55958579/114035846-1edcb400-989d-11eb-98df-0f5b4f9bccd1.png)
-<img src="https://user-images.githubusercontent.com/55958579/114035846-1edcb400-989d-11eb-98df-0f5b4f9bccd1.png" width="100" height="100">
+
+<img src="https://user-images.githubusercontent.com/55958579/114035846-1edcb400-989d-11eb-98df-0f5b4f9bccd1.png" width="500" height="2000">
 This project is based on easy access to multiple apps and has a library
 which could be private, public or one to one end. With Google
 SignIn,Crud Operations on Firebase, Text Image Books can be
