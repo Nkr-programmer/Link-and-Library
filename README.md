@@ -5,11 +5,11 @@ Show some ❤️ and star the repo to support the project
 Screenshots
 
 <img src="https://user-images.githubusercontent.com/55958579/114072615-19449580-98c0-11eb-8ecb-f0bcc4974055.jpg" width="300px" height="600px" >
-<p float="left">
+<!-- <p float="left">
 <img src="https://user-images.githubusercontent.com/55958579/114072720-32e5dd00-98c0-11eb-84cf-2c9e434a5bf3.jpg" width="300px" height="600px" />
 <img src="https://user-images.githubusercontent.com/55958579/114072886-53ae3280-98c0-11eb-98c6-f0f748a47678.jpg" width="300px" height="600px" />
 <img src="https://user-images.githubusercontent.com/55958579/114073004-72acc480-98c0-11eb-8752-64a54fd706c6.jpg" width="300px" height="600px"> 
-</p>
+</p> -->
 <p float="left">
 <img src="https://user-images.githubusercontent.com/55958579/114073350-d1723e00-98c0-11eb-8934-b464d54239c9.jpg" width="300px" height="600px" />
 <img src="https://user-images.githubusercontent.com/55958579/114073374-d800b580-98c0-11eb-8450-9da52b470a01.jpg" width="300px" height="600px">
