@@ -1,4 +1,4 @@
-# Flutter Link AND Library
+# Flutter Link and Library
 Building a Link AND Library in Flutter.
 
 Show some ❤️ and star the repo to support the project
