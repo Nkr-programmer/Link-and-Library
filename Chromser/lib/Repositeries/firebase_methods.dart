@@ -1,10 +1,8 @@
 import 'package:Chromser/Models/recentlink.dart';
 import 'package:Chromser/Models/user.dart' as Users;
-import 'package:Chromser/Screens/classifications/Subconstants.dart';
 import 'package:Chromser/utils/utilites.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class FirebaseMethods
@@ -101,28 +99,7 @@ var sap=user.toMap(user) as Map<String,dynamic>;
     linksSets.sort((a,b)=>a.addedOn.compareTo(b.addedOn));
      return linksSets;
   }
-Future<bool> updateLinkToDb(Subconstants currentlink) async{
-List<RecentMessage> linksSets= await  fetchAllLinks();
-bool got=linksSets.any((element) => element.name==currentlink.name);
-if(!got){return false;}
-else{    
-  User user;
-  user =await _auth.currentUser!;
-  QuerySnapshot querySnapshot = await _linksCollection.doc(user.uid).collection("nope")
-        .where("link_name", isEqualTo: currentlink.name)
-        .get();
-int numb=linksSets.where((element) => element.name==currentlink.name).elementAt(0).number;
-        querySnapshot.docs[0].reference.update({
-           "link_index": currentlink.index,
-          "link_name":  currentlink.name,
-          "link_brand": currentlink.brand,
-          "link_url":   currentlink.url,
-          "link_addedOn": Timestamp.now(),
-          "link_number": numb+1,
-          "link_image":   currentlink.image,
-        });
-       return true;}
-}
+
 Future<void> deleteLinkToDb(RecentMessage currentlink) async{
 
   User user;

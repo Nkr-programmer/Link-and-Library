@@ -1,7 +1,5 @@
 import 'package:Chromser/Repositeries/firebase_repository.dart';
-import 'package:Chromser/Screens/classifications/HomeScreen.dart';
 import 'package:Chromser/Screens/LoginScreen.dart';
-import 'package:Chromser/Screens/classifications/chat/Screens/search_screen.dart';
 import 'package:Chromser/Screens/classifications/chat/provider/Image_uploader.dart';
 import 'package:Chromser/Screens/classifications/chat/provider/user_provider.dart';
 import 'package:Chromser/firebase_options.dart';
