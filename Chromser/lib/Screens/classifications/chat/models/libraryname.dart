@@ -1,18 +1,18 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Name{
-  String senderId;
-  String receiverId;
-  String type;
-Timestamp timestamp;
+ late String senderId;
+ late String receiverId;
+ late String type;
+late Timestamp timestamp;
 
 
-Name({this.senderId,this.receiverId,this.type,this.timestamp});
+Name({required this.senderId,required this.receiverId,required this.type,required this.timestamp});
 
 
 
-Map toMap(){
-var map = Map<String,dynamic>();
+Map<String,dynamic> toMap(){
+Map<String,dynamic> map = Map<String,dynamic>();
 map["senderId"]=this.senderId;
 map["receiverId"]=this.receiverId;
 map["type"]=this.type;

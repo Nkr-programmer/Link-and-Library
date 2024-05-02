@@ -4,14 +4,20 @@ import 'package:Chromser/Screens/LoginScreen.dart';
 import 'package:Chromser/Screens/classifications/chat/Screens/search_screen.dart';
 import 'package:Chromser/Screens/classifications/chat/provider/Image_uploader.dart';
 import 'package:Chromser/Screens/classifications/chat/provider/user_provider.dart';
+import 'package:Chromser/firebase_options.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:Chromser/Screens/classifications/chat/Screens/home_screen.dart' as hm;
 
-void main() {
+void main()  async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(MyHomePage());
 }
-  
 
 //keytool -list -v -keystore C:\Users\nikhil\.android\debug.keystore -alias androiddebugkey -storepass android -keypass android
 class MyHomePage extends StatefulWidget {
@@ -20,31 +26,31 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
- FirebaseRepository _repository = FirebaseRepository();
+  FirebaseRepository _repository = FirebaseRepository();
 
   @override
   Widget build(BuildContext context) {
-   // Firestore.instance.collection("users").document().setData({"name":"nkr_programmer"});
+    // Firestore.instance.collection("users").document().setData({"name":"nkr_programmer"});
     return MultiProvider(
-         
-        providers: [
-        ChangeNotifierProvider(create: (_)=>ImageUploadProvider()),
-        ChangeNotifierProvider(create: (_)=>UserProvider()),
+      providers: [
+        ChangeNotifierProvider(create: (_) => ImageUploadProvider()),
+        ChangeNotifierProvider(create: (_) => UserProvider()),
       ],
-          child: MaterialApp(
-        title:"Chromser",
-        debugShowCheckedModeBanner: false,
-     
-theme: ThemeData(brightness: Brightness.dark),
-        home: FutureBuilder(future:  _repository.getCurrentUser(), 
-        builder:(context, AsyncSnapshot<FirebaseUser> snapshot) {  
-          if(snapshot.hasData)
-          {return HomeScreen();}
-          else
-          {return LoginScreen();}
+      child: MaterialApp(
+          title: "Chromser",
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(brightness: Brightness.dark),
+          home: FutureBuilder(
+            future: _repository.getCurrentUser(),
+            builder: (context, AsyncSnapshot<User?> snapshot) {
+              if (snapshot.hasData) {
+                return hm.HomeScreen();
+              } else {
+                return LoginScreen();
+              }
 // when current user is clicked if null then loginscreen else homescreen
-        },)
-      ),
+            },
+          )),
     );
   }
 }

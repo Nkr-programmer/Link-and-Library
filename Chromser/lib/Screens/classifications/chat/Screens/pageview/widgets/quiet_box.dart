@@ -1,6 +1,5 @@
 //1
 import 'package:Chromser/Models/user.dart';
-import 'package:Chromser/Repositeries/addLibrary.dart';
 import 'package:Chromser/Screens/classifications/chat/Screens/pageview/widgets/selection.dart';
 import 'package:Chromser/Screens/classifications/chat/Screens/pickup/AllLibrary.dart';
 import 'package:Chromser/Screens/classifications/chat/Screens/search_screen.dart';
@@ -9,10 +8,10 @@ import 'package:flutter/material.dart';
 
 
 class QuietBox extends StatelessWidget {
-  int num;
+   int num =-1;
   QuietBox(this.num);
-User me=User();
-User searchedUser=User();
+ User? me = User( uid: '',name:  "default",email: '',username: '',status: '',state: -1,profilePhoto: '',);
+ User? searchedUser = User( uid: '',name:  "default",email: '',username: '',status: '',state: -1,profilePhoto: '',);
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -34,10 +33,10 @@ User searchedUser=User();
                 ),
               ),
               SizedBox(height: 25),
-              FlatButton(
-                color: UniversalVariables.lightBlueColor,
+              TextButton(
+                style: ButtonStyle(backgroundColor: MaterialStateProperty.all(UniversalVariables.lightBlueColor),),
                 child: Text("START SEARCHING"),
-                onPressed: () =>  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
+                onPressed: () =>  Navigator.push(context, MaterialPageRoute(builder: (context) {
  return num<3?Search_Screen(num:num,text: "",work:"Search"):AllLibrary(num:num,receiver:searchedUser,sender:me);
   },)),
               ),
@@ -51,8 +50,8 @@ User searchedUser=User();
                 ),
               ),
               SizedBox(height: 25),
-              FlatButton(
-                color: UniversalVariables.lightBlueColor,
+              TextButton(
+                style: ButtonStyle(backgroundColor: MaterialStateProperty.all(UniversalVariables.lightBlueColor),),
                 child: Text("START ADDING"),
                 onPressed: () => Navigator.push(
                   context,

@@ -1,22 +1,22 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Message{
-  String senderId;
-  String receiverId;
-  String type;
-  String message;
-Timestamp timestamp;
-String photoUrl;
+ late String senderId;
+ late String receiverId;
+ late String type;
+ late String message;
+ late Timestamp timestamp;
+ late String photoUrl;
 
-Message({this.senderId,this.receiverId,this.type,this.message,this.timestamp});
-Message.imageMessage({this.senderId,this.receiverId,this.message,this.type,this.timestamp,this.photoUrl});
-Message.pdfMessage({this.senderId,this.receiverId,this.message,this.type,this.timestamp,this.photoUrl});
-
-
+Message({required this.senderId,required this.receiverId,required this.type,required this.message,required this.timestamp});
+Message.imageMessage({required this.senderId,required this.receiverId,required this.message,required this.type,required this.timestamp,required this.photoUrl});
+Message.pdfMessage({required this.senderId,required this.receiverId,required this.message,required this.type,required this.timestamp,required this.photoUrl});
 
 
-Map toMap(){
-var map = Map<String,dynamic>();
+
+
+Map<String,dynamic> toMap(){
+Map<String,dynamic> map = Map<String,dynamic>();
 map["senderId"]=this.senderId;
 map["receiverId"]=this.receiverId;
 map["type"]=this.type;
@@ -27,8 +27,8 @@ return map;
 }
 
 
-Map toImageMap(){
-var map = Map<String,dynamic>();
+Map<String,dynamic> toImageMap(){
+Map<String,dynamic> map = Map<String,dynamic>();
 map["senderId"]=this.senderId;
 map["receiverId"]=this.receiverId;
 map["type"]=this.type;
@@ -39,8 +39,8 @@ return map;
 
 }
 
-Map topdfMap(){
-var map = Map<String,dynamic>();
+Map<String,dynamic> topdfMap(){
+Map<String,dynamic> map = Map<String,dynamic>();
 map["senderId"]=this.senderId;
 map["receiverId"]=this.receiverId;
 map["type"]=this.type;
@@ -58,7 +58,7 @@ Message.fromMap(Map<String,dynamic> map){
     this.type=map["type"];
     this.message=map["message"];
     this.timestamp=map["timestamp"];
-    this.photoUrl=map["photoUrl"];
+    this.photoUrl=map["photoUrl"]==null?'':map["photoUrl"];
   }
 
 

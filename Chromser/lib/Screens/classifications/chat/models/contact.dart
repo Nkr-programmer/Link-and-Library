@@ -2,14 +2,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 
 class Contact{
-String uid;
-Timestamp addedOn;
-Contact({this.uid,this.addedOn});
+late String uid;
+late Timestamp addedOn;
+Contact({required this.uid,required this.addedOn});
 
 
 
-Map toMap(Contact contact){
-var data = Map<String,dynamic>();
+Map<String,dynamic> toMap(Contact contact){
+Map<String,dynamic> data = Map<String,dynamic>();
 data["contact_id"]=contact.uid;
 data["added_on"]=contact.addedOn;
 return data;

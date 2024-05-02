@@ -4,12 +4,12 @@ import 'package:flutter/cupertino.dart';
 
 
 class UserProvider with ChangeNotifier{
-  User _user;
+  User? _user;
   AuthMethods _authMethods= AuthMethods();
-  User get getUser=>_user;
+  User? get getUser=>_user;
   Future<void> refreshUser() async{
-User user = await _authMethods.getUserDetails();
-_user=user;
+User? user = await _authMethods.getUserDetails();
+_user=user!;
 notifyListeners();
   }
 }

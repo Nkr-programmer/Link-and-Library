@@ -1,16 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class RecentMessage{
-   int index;
-   String name;
-   String brand;
-   String url;
-   Timestamp addedOn;
-   int number;
-   String image;
+ late  int index;
+ late  String name;
+ late  String brand;
+ late  String url;
+ late  Timestamp addedOn;
+ late  int number;
+ late  String image;
 
-  RecentMessage({this.index,this.name,this.brand,this.url,this.addedOn
-  ,this.number,this.image});
+  RecentMessage({required this.index,required this.name,required this.brand,required this.url,required this.addedOn
+  ,required this.number,required this.image});
 
 
 
@@ -27,7 +27,7 @@ recentMessageMap["link_number"]=this.number;
 recentMessageMap["link_image"]=this.image;
 
 return recentMessageMap;}
-RecentMessage.fromMap(Map recentMessageMap){
+RecentMessage.fromMap(Map<String,dynamic> recentMessageMap){
 this.index=recentMessageMap["link_index"];
 this.name=recentMessageMap["link_name"];
 this.brand=recentMessageMap["link_brand"];

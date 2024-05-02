@@ -8,7 +8,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class ChatMethods {
-  static final Firestore _firestore = Firestore.instance;
+  static final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final CollectionReference _messageCollection =
       _firestore.collection(MESSAGES_COLLECTION);
   final CollectionReference _userCollection =
@@ -16,37 +16,34 @@ class ChatMethods {
   AuthMethods _authMethods = new AuthMethods();
 
 
-  Future<void> addMessageToDb(
-      Message message, User sender, User receiver, String text, int num) async {
-  
-  
+  Future<void> addMessageToDb(Message message, User? sender, User? receiver, String text, int num, User? author) async {
+  // author is mainly for 31 which means mine public or we can say public
     var map = message.toMap();
-    Name name = Name(
-      receiverId:
-          num == 2 || num == 31 ? "" : num == 3 ? sender.uid : receiver.uid,
-      senderId: sender.uid,
-      type: text,
-      timestamp: Timestamp.now(),
-    );
+    Name name = Name(receiverId:num == 2 || num == 31 ? "" : num == 3 ? sender!.uid : receiver!.uid,senderId: sender!.uid,type: text,timestamp: Timestamp.now(),);
     var maps = name.toMap();
 //31 is mine public chats where as 32 is mine private chats
-    await num == 2 || num == 31
+    await num == 2 
         ? _firestore
             .collection("Public")
-            .document(message.senderId)
+            .doc(message.senderId)
+            .collection(text)
+            .add(map)
+          :num==31?_firestore
+            .collection("Public")
+            .doc(author!.uid)
             .collection(text)
             .add(map)
         : num == 3
             ? _firestore
                 .collection("Individual")
-                .document(message.senderId)
+                .doc(message.senderId)
                 .collection(text)
                 .add(map)
             : _firestore
                 .collection("Private")
-                .document(message.senderId)
+                .doc(message.senderId)
                 .collection(message.receiverId)
-                .document(text)
+                .doc(text)
                 .collection(text)
                 .add(map);
 
@@ -66,25 +63,31 @@ class ChatMethods {
     //     }));
 
     if (isthere == 0) {
-      num == 2 || num == 31
+      num == 2
           ? _firestore
               .collection("Public")
-              .document("name")
+              .doc("name")
               .collection(message.senderId)
+              .add(maps)
+            :num==31
+            ? _firestore
+              .collection("Public")
+              .doc("name")
+              .collection(author!.uid)
               .add(maps)
           : num == 3
               ? _firestore
                   .collection("Individual")
-                  .document("name")
+                  .doc("name")
                   .collection(message.senderId)
                   .add(maps)
               : {_firestore
                   .collection("Private")
-                  .document("name")
+                  .doc("name")
                   .collection(message.receiverId)
                   .add(maps),_firestore
               .collection("Private")
-              .document("name")
+              .doc("name")
               .collection(message.senderId)
               .add(maps)};
       // num != 2 && num != 31 && num != 3
@@ -98,45 +101,44 @@ class ChatMethods {
     return await num != 2 && num != 31 && num != 3
         ? _firestore
             .collection("Private")
-            .document(message.receiverId)
+            .doc(message.receiverId)
             .collection(message.senderId)
-            .document(text)
+            .doc(text)
             .collection(text)
             .add(map)
         : print("dne");
   }
 
-  void setImageMsg(Message message, User receiver, User sender, int num,
-      String text) async {
+  void setImageMsg(Message message, User? receiver, User? sender, int num,String text, User? author) async {
 
 
     // create imagemap
     var map = message.toImageMap();
-    Name name = Name(
-        receiverId:        num == 2 || num == 31 ? "" : num == 3 ? sender.uid : receiver.uid,
-      senderId: sender.uid,
-      type: text,
-      timestamp: Timestamp.now(),
-    );
+    Name name = Name(receiverId:num == 2 || num == 31 ? "" : num == 3 ? sender!.uid : receiver!.uid,senderId: sender!.uid,type: text,timestamp: Timestamp.now(),);
     var maps = name.toMap();
 
-    await num == 2|| num == 31
+    await num == 2
         ? _firestore
             .collection("Public")
-            .document(message.senderId)
+            .doc(message.senderId)
+            .collection(text)
+            .add(map)
+          :num==31?_firestore
+            .collection("Public")
+            .doc(author!.uid)
             .collection(text)
             .add(map)
                    : num == 3
             ? _firestore
                 .collection("Individual")
-                .document(message.senderId)
+                .doc(message.senderId)
                 .collection(text)
                 .add(map)
         : _firestore
             .collection("Private")
-            .document(message.senderId)
+            .doc(message.senderId)
             .collection(message.receiverId)
-            .document(text)
+            .doc(text)
             .collection(text)
             .add(map);
 
@@ -157,24 +159,30 @@ class ChatMethods {
       
       
       if (isthere == 0) {
-      num == 2 || num == 31? _firestore
+      num == 2 ? _firestore
             .collection("Public")
-            .document("name")
+            .doc("name")
             .collection(message.senderId)
             .add(maps)
+          :num==31
+            ? _firestore
+              .collection("Public")
+              .doc("name")
+              .collection(author!.uid)
+              .add(maps)
         : num == 3
               ? _firestore
                   .collection("Individual")
-                  .document("name")
+                  .doc("name")
                   .collection(message.senderId)
                   .add(maps)
               :{_firestore
             .collection("Private")
-            .document("name")
+            .doc("name")
             .collection(message.receiverId)
             .add(maps),_firestore
             .collection("Private")
-            .document("name")
+            .doc("name")
             .collection(message.senderId)
             .add(maps)};
     // num != 2&& num != 31 && num != 3
@@ -188,43 +196,42 @@ class ChatMethods {
 num != 2 && num != 31 && num != 3
         ? _firestore
             .collection("Private")
-            .document(message.receiverId)
+            .doc(message.receiverId)
             .collection(message.senderId)
-            .document(text)
+            .doc(text)
             .collection(text)
             .add(map)
         : print("dne");
   }
   
-  void setPdfMsg(Message message, User receiver, User sender, int num,
-      String text) async {
+  void setPdfMsg(Message message, User? receiver, User? sender, int num,String text, User? author) async {
     // create imagemap
     var map = message.topdfMap();
-    Name name = Name(
-        receiverId:        num == 2 || num == 31 ? "" : num == 3 ? sender.uid : receiver.uid,
-      senderId: sender.uid,
-      type: text,
-      timestamp: Timestamp.now(),
-    );
+    Name name = Name(receiverId:num == 2 || num == 31 ? "" : num == 3 ? sender!.uid : receiver!.uid,senderId: sender!.uid,type: text,timestamp: Timestamp.now(),);
     var maps = name.toMap();
 
-    await num == 2|| num == 31
+    await num == 2
         ? _firestore
             .collection("Public")
-            .document(message.senderId)
+            .doc(message.senderId)
+            .collection(text)
+            .add(map)       
+         :num==31?_firestore
+            .collection("Public")
+            .doc(author!.uid)
             .collection(text)
             .add(map)
                    : num == 3
             ? _firestore
                 .collection("Individual")
-                .document(message.senderId)
+                .doc(message.senderId)
                 .collection(text)
                 .add(map)
         : _firestore
             .collection("Private")
-            .document(message.senderId)
+            .doc(message.senderId)
             .collection(message.receiverId)
-            .document(text)
+            .doc(text)
             .collection(text)
             .add(map);
 
@@ -245,24 +252,30 @@ num != 2 && num != 31 && num != 3
       
       
       if (isthere == 0) {
-      num == 2 || num == 31? _firestore
+      num == 2 ? _firestore
             .collection("Public")
-            .document("name")
+            .doc("name")
             .collection(message.senderId)
             .add(maps)
+         :num==31
+            ? _firestore
+              .collection("Public")
+              .doc("name")
+              .collection(author!.uid)
+              .add(maps)
         : num == 3
               ? _firestore
                   .collection("Individual")
-                  .document("name")
+                  .doc("name")
                   .collection(message.senderId)
                   .add(maps)
               :{_firestore
             .collection("Private")
-            .document("name")
+            .doc("name")
             .collection(message.receiverId)
             .add(maps),_firestore
             .collection("Private")
-            .document("name")
+            .doc("name")
             .collection(message.senderId)
             .add(maps)};
     // num != 2&& num != 31 && num != 3
@@ -276,24 +289,24 @@ num != 2 && num != 31 && num != 3
 num != 2 && num != 31 && num != 3
         ? _firestore
             .collection("Private")
-            .document(message.receiverId)
+            .doc(message.receiverId)
             .collection(message.senderId)
-            .document(text)
+            .doc(text)
             .collection(text)
             .add(map)
         : print("dne");
   }
 
-  DocumentReference getContactDocument({String of, String forContact}) =>
+  DocumentReference getContactDocument({String? of, String? forContact}) =>
       _userCollection
-          .document(of)
+          .doc(of)
           .collection(CONTACTS_COLLECTION)
-          .document(forContact);
+          .doc(forContact);
 
-  void addToContacts({String senderId, String receiverId}) async {
+  void addToContacts({String? senderId, String? receiverId}) async {
     Timestamp currentTime = Timestamp.now();
 
-    await addToSendersContact(senderId, receiverId, currentTime);
+    await addToSendersContact(senderId!, receiverId!, currentTime);
     await addToReceiversContact(senderId, receiverId, currentTime);
   }
 
@@ -307,7 +320,7 @@ num != 2 && num != 31 && num != 3
 
       var receiverMap = receiverContact.toMap(receiverContact);
       await getContactDocument(of: senderId, forContact: receiverId)
-          .setData(receiverMap);
+          .set(receiverMap);
     }
   }
 
@@ -321,19 +334,19 @@ num != 2 && num != 31 && num != 3
 
       var senderMap = senderContact.toMap(senderContact);
       await getContactDocument(of: receiverId, forContact: senderId)
-          .setData(senderMap);
+          .set(senderMap);
     }
   }
 
-  Stream<QuerySnapshot> fetchContacts({String userId}) => _userCollection
-      .document(userId)
+  Stream<QuerySnapshot> fetchContacts({String? userId}) => _userCollection
+      .doc(userId)
       .collection(CONTACTS_COLLECTION)
       .snapshots();
 
   Stream<QuerySnapshot> fetchLastMessagesBetween(
-          {@required String senderId, @required String receiverId}) =>
+          {required String senderId, required String receiverId}) =>
       _messageCollection
-          .document(senderId)
+          .doc(senderId)
           .collection(receiverId)
           .orderBy("timestamp")
           .snapshots();

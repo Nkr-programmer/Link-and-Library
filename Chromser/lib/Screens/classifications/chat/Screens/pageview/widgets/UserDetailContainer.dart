@@ -23,7 +23,7 @@ class UserDetailsContainer extends StatelessWidget {
       if (isLoggedOut) {
         // set userState to offline as the user logs out'
         authMethods.setUserState(
-          userId: userProvider.getUser.uid,
+          userId: userProvider.getUser!.uid,
           userState: UserState.Offline,
         );
 
@@ -51,7 +51,7 @@ class UserDetailsContainer extends StatelessWidget {
             centerTitle: true,
             title: ShimmeringLogo(),
             actions: <Widget>[
-              FlatButton(
+              TextButton(
                 onPressed: () => signOut(),
                 child: Text(
                   "Sign Out",
@@ -71,14 +71,14 @@ class UserDetailsBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final UserProvider userProvider = Provider.of<UserProvider>(context);
-    final User user = userProvider.getUser;
+    final User? user = userProvider.getUser;
 
     return Container(
       padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
       child: Row(
         children: [
           Cachedimage(
-            user.profilePhoto,
+            user!.profilePhoto,
             isRound: true,
             radius: 50,
           ),

@@ -11,7 +11,7 @@ class OnlineDotIndicator extends StatelessWidget {
   final AuthMethods _authMethods = AuthMethods();
 
   OnlineDotIndicator({
-    @required this.uid,
+    required this.uid,
   });
 
   @override
@@ -36,8 +36,11 @@ class OnlineDotIndicator extends StatelessWidget {
         builder: (context, snapshot) {
           User user;
 
-          if (snapshot.hasData && snapshot.data.data != null) {
-            user = User.fromMap(snapshot.data.data);
+          if (snapshot.hasData && snapshot.data!.data() != null) {
+            user = User.fromMap(snapshot.data!.data() as Map<String, dynamic>);
+          }
+          else{
+            user=User(uid: uid, name: '', email: '', username: '', status: '', state: -1, profilePhoto: '');
           }
 
           return Container(
@@ -46,7 +49,7 @@ class OnlineDotIndicator extends StatelessWidget {
             margin: EdgeInsets.only(right: 5, top: 5),
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: getColor(user?.state),
+              color: getColor(user.state),
             ),
           );
         },

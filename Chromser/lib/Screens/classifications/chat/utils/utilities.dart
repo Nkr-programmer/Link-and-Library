@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:image/image.dart' as Im;
 import 'package:path_provider/path_provider.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 class Utilities {
   static String getUsername(String email) {
@@ -19,22 +20,36 @@ class Utilities {
     return firstNameIntial + lastNameInitials;
   }
 
-  static Future<File> pickImage({@required ImageSource source}) async {
-    File selectedImage = await ImagePicker.pickImage(source: source);
-    return compressImage(selectedImage);
-  }
+  // static Future<File> pickImage({required ImageSource source}) async {
+  //   ImagePicker imagePicker = ImagePicker();
+  //   print("starttttttt");
+  //   XFile? selectedImage = await imagePicker.pickImage(source: source);
+  //   if (selectedImage != null) {
+  //     File file = File(selectedImage.path);
+  //     //File compressFile =await compressImage(file);
+  //      //print(compressFile.uri.toString()+"middddddd2");
+  //     return file;
+  //   } else {
+  //     print("imagefilllllleo");
+  //     throw Exception('No image selected');
+  //   }
+  // }
 
-  static Future<File> compressImage(File imageToCompress) async {
-    final tempOir = await getTemporaryDirectory();
-    final path = tempOir.path;
-    int random = Random().nextInt(1000);
+  // static Future<File> compressImage(File imageToCompress) async {
+  //   String path="/assets/db";
+  //   if(!kIsWeb){
+  //   Directory tempOir = await getTemporaryDirectory();
+  //   print("hiiii");
+  //   path = tempOir.path;
+  //   }
+  //   int random = Random().nextInt(1000);
 
-    Im.Image image = Im.decodeImage(imageToCompress.readAsBytesSync());
-    Im.copyResize(image, width: 500, height: 500);
+  //   Im.Image? image = Im.decodeImage(imageToCompress.readAsBytesSync());
+  //   Im.copyResize(image!, width: 500, height: 500);
 
-    return new File('$path/img_$random.jpg')
-      ..writeAsBytesSync(Im.encodeJpg(image, quality: 85));
-  }
+  //   return new File('$path/img_$random.jpg')
+  //     ..writeAsBytesSync(Im.encodeJpg(image, quality: 85));
+  // }
 
   static int stateToNum(UserState userState) {
     switch (userState) {

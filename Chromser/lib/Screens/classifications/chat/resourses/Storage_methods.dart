@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'dart:typed_data';
+
 import 'package:Chromser/Models/user.dart';
 import 'package:Chromser/Screens/classifications/chat/models/message.dart';
 import 'package:Chromser/Screens/classifications/chat/provider/Image_uploader.dart';
@@ -12,85 +14,87 @@ import 'package:flutter/material.dart';
 
 
 class StorageMethods {
-  static final Firestore firestore = Firestore.instance;
-
-  StorageReference _storageReference;
-
+  static final FirebaseFirestore firestore = FirebaseFirestore.instance;
   //user class
-  User user = User();
+  User? user;
 
-  Future<String> uploadImageToStorage(File imageFile) async {
+  Future<String?> uploadImageToStorage(List<int> imageFile, String name) async {
     // mention try catch later on
 
     try {
-      _storageReference = FirebaseStorage.instance
-          .ref()
-          .child('${DateTime.now().millisecondsSinceEpoch}');
-      StorageUploadTask storageUploadTask =
-          _storageReference.putFile(imageFile);
-      var url = await (await storageUploadTask.onComplete).ref.getDownloadURL();
-      // print(url);
+      FirebaseStorage storage=FirebaseStorage.instance;
+      Reference? reference;
+      reference = storage.ref().child(name);
+      Uint8List asset = Uint8List.fromList(imageFile);
+      UploadTask uploadTask = reference.putData(asset);
+      String url = await uploadTask.then((res) {
+        return res.ref.getDownloadURL();
+      });
       return url;
     } catch (e) {
+      print(e.toString()+"errrrrrrrror");
       return null;
     }
   }
-     Future<String> uploadPdfToStorage(List<int> asset, String name)async{
+     Future<String?> uploadPdfToStorage(List<int> assets, String name)async{
         try {
-    StorageReference reference = FirebaseStorage.instance.ref().child(name);
-    StorageUploadTask uploadTask = reference.putData(asset);
-    String url = await (await uploadTask.onComplete).ref.getDownloadURL();
-     print(url+"  hey dude");
-       return url;
-    } catch (e) {
-      return null;
-    }
+            FirebaseStorage storage=FirebaseStorage.instance;
+            Reference? reference;
+            reference = storage.ref().child(name);
+            Uint8List asset = Uint8List.fromList(assets);
+            UploadTask uploadTask = reference.putData(asset);
+            String url = await uploadTask.then((res) {
+              return res.ref.getDownloadURL();
+            });
+            print(url.toString()+"duuuuuuuuuude");
+            return url;
+        } catch (e) {print(e.toString()+"errrrrr");  return null;}
   }
 
   void uploadImage({
-    @required Message message,
-    @required File image,
-    @required User receiver,
-    @required User sender,
-    @required ImageUploadProvider imageUploadProvider,
-    @required int num,
-    @required String text,
+    required Message message,
+    required List<int>? image,
+    required User? receiver,
+    required User? sender,
+    required ImageUploadProvider? imageUploadProvider,
+    required int num,
+    required String text,
+    required String fileName,
+    required User? author
   }) async {
     final ChatMethods chatMethods = ChatMethods();
-
     // Set some loading value to db and show it to user
-    imageUploadProvider.setToLoading();
-
+    imageUploadProvider!.setToLoading();
     // Get url from the image bucket
-    String url = await uploadImageToStorage(image);
-
+    print(image.toString()+"messsssss");
+    String? url = await uploadImageToStorage(image!, fileName);
+    print(url.toString()+"urrrrrrrrrl");
     // Hide loading
     imageUploadProvider.setToIdle();
-message.photoUrl=url;
-    chatMethods.setImageMsg(message, receiver, sender,num,text);
+    message.photoUrl=url!;
+    chatMethods.setImageMsg(message, receiver, sender,num,text,author);
   }
     void uploadPdf({
-    @required Message message,
-    @required List<int> pdf,
-    @required User receiver,
-    @required User sender,
-    @required ImageUploadProvider imageUploadProvider,
-    @required int num,
-    @required String text,
-    @required String fileName
+    required Message message,
+    required List<int>? pdf,
+    required User? receiver,
+    required User? sender,
+    required ImageUploadProvider? imageUploadProvider,
+    required int num,
+    required String text,
+    required String fileName,
+    required User? author
   }) async {
     final ChatMethods chatMethods = ChatMethods();
-
     // Set some loading value to db and show it to user
-    imageUploadProvider.setToLoading();
-
+    imageUploadProvider!.setToLoading();
     // Get url from the image bucket
-    String url = await uploadPdfToStorage(pdf,fileName);
-
+    String? url = await uploadPdfToStorage(pdf!,fileName);
+    print(url.toString()+"givvvvvve");
     // Hide loading
     imageUploadProvider.setToIdle();
-message.photoUrl=url;
-    chatMethods.setPdfMsg(message, receiver, sender,num,text);
+    message.photoUrl=url!;
+    chatMethods.setPdfMsg(message, receiver, sender,num,text,author);
   }
 }
 

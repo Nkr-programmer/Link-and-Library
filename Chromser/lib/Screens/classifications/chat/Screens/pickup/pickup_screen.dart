@@ -13,7 +13,7 @@ class Pickup_Screen extends StatelessWidget {
 final Call call;
 final CallMethods callMethods=CallMethods();
 
-   Pickup_Screen({@required this.call});
+   Pickup_Screen({required this.call});
 
   @override
   Widget build(BuildContext context) {

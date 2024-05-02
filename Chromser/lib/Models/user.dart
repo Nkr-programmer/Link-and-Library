@@ -1,24 +1,24 @@
 class User{
-String uid;
-String name;
-String email;
-String username;
-String status;
-int state;
-String profilePhoto;
+late String uid;
+late String name;
+late String email;
+late String username;
+late String status;
+late int state;
+late String profilePhoto;
 
 User({
-this.uid,
-this.name,
-this.email,
-this.username,
-this.status,
-this.state,
-this.profilePhoto,
+required this.uid,
+required this.name,
+required this.email,
+required this.username,
+required this.status,
+required this.state,
+required this.profilePhoto,
 });
 
-Map toMap(User user){
-var data = Map<String,dynamic>();
+Map<String,dynamic> toMap(User user){
+Map<String,dynamic> data = Map<String,dynamic>();
 data["uid"]=user.uid;
 data["name"]=user.name;
 data["email"]=user.email;
@@ -30,12 +30,12 @@ return data;
 //convert  user raw to map
 }
 
-User.fromMap(Map<String,dynamic>mapData){
+User.fromMap(Map<String,dynamic> mapData){
   this.uid =mapData["uid"];
 this.name=mapData["name"];
 this.email=mapData["email"];
 this.username=mapData["username"];
-this.status=mapData["status"];
+this.status=mapData["status"]==null?'':mapData["status"];
 this.state=mapData["state"];
 this.profilePhoto=mapData["profilePhoto"];
 }

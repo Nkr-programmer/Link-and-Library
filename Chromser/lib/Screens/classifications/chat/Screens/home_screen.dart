@@ -14,56 +14,67 @@ class HomeScreen extends StatefulWidget {
   _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver{
-  PageController pageController;
+class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
+  PageController? pageController;
   int _page = 0;
-  final AuthMethods _authMethods= AuthMethods();
- UserProvider userProvider;
+  final AuthMethods _authMethods = AuthMethods();
+  UserProvider? userProvider;
   @override
   void initState() {
     super.initState();
-   
-    SchedulerBinding.instance.addPostFrameCallback((_)async {
-       userProvider=Provider.of<UserProvider>(context,listen:false);
-   await  userProvider.refreshUser();
 
-    _authMethods.setUserState(userId: userProvider.getUser.uid, userState: UserState.OnliNE);
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      userProvider = Provider.of<UserProvider>(context, listen: false);
+      await userProvider!.refreshUser();
+
+      _authMethods.setUserState(
+          userId: userProvider!.getUser!.uid, userState: UserState.OnliNE);
     });
     WidgetsBinding.instance.addObserver(this);
     pageController = PageController();
   }
 
-@override
-void  dispose()
-{
-  super.dispose();
-  WidgetsBinding.instance.removeObserver(this);
-}
-
-void didChangedAppLifeCycle(AppLifecycleState state){
-  String currentUserId= 
-  (userProvider !=null && userProvider !=null)?userProvider.getUser.uid:"";
-  super.didChangeAppLifecycleState(state);
-  switch(state){
-    
-    case AppLifecycleState.resumed:
-      
-       currentUserId!=null?  _authMethods.setUserState(userId: currentUserId,userState: UserState.OnliNE):print("resume");
-      break;
-    case AppLifecycleState.inactive:
-      
-            currentUserId!=null?  _authMethods.setUserState(userId: currentUserId,userState: UserState.Offline):print("offline");
-      break;
-    case AppLifecycleState.paused:
-       currentUserId!=null?  _authMethods.setUserState(userId: currentUserId,userState: UserState.Waiting):print("Paused");
-
-      break;
-    case AppLifecycleState.detached:
-           currentUserId!=null?  _authMethods.setUserState(userId: currentUserId,userState: UserState.Offline):print("detached");
-
-      break;
+  @override
+  void dispose() {
+    super.dispose();
+    WidgetsBinding.instance.removeObserver(this);
   }
-}
+
+  void didChangedAppLifeCycle(AppLifecycleState state) {
+    String currentUserId = (userProvider != null && userProvider != null)
+        ? userProvider!.getUser!.uid
+        : "";
+    super.didChangeAppLifecycleState(state);
+    switch (state) {
+      case AppLifecycleState.resumed:
+        currentUserId != null
+            ? _authMethods.setUserState(
+                userId: currentUserId, userState: UserState.OnliNE)
+            : print("resume");
+        break;
+      case AppLifecycleState.inactive:
+        currentUserId != null
+            ? _authMethods.setUserState(
+                userId: currentUserId, userState: UserState.Offline)
+            : print("offline");
+        break;
+      case AppLifecycleState.paused:
+        currentUserId != null
+            ? _authMethods.setUserState(
+                userId: currentUserId, userState: UserState.Waiting)
+            : print("Paused");
+
+        break;
+      case AppLifecycleState.detached:
+        currentUserId != null
+            ? _authMethods.setUserState(
+                userId: currentUserId, userState: UserState.Offline)
+            : print("detached");
+
+        break;
+    }
+  }
+
   void onPageChanged(int page) {
     setState(() {
       _page = page;
@@ -71,20 +82,20 @@ void didChangedAppLifeCycle(AppLifecycleState state){
   }
 
   void navigationTapped(int page) {
-    pageController.jumpToPage(page);
+    pageController!.jumpToPage(page);
   }
 
   @override
   Widget build(BuildContext context) {
-    double _labelFontSize = 10;
+    double _labelFontSize = 30;
     return PickupLayout(
-          scaffold: Scaffold(
+      scaffold: Scaffold(
         backgroundColor: UniversalVariables.blackColor,
         body: PageView(
           children: <Widget>[
-            Container(child:ChatListScreen(num:1)),
-            Container(child:ChatListScreen(num:2)),
-            Container(child:ChatListScreen(num:3)),
+            Container(child: ChatListScreen(num: 1)),
+            Container(child: ChatListScreen(num: 2)),
+            Container(child: ChatListScreen(num: 3)),
           ],
           controller: pageController,
           onPageChanged: onPageChanged,
@@ -97,50 +108,56 @@ void didChangedAppLifeCycle(AppLifecycleState state){
               backgroundColor: UniversalVariables.blackColor,
               items: <BottomNavigationBarItem>[
                 BottomNavigationBarItem(
-                  icon: Icon(Icons.people,
-                      color: (_page == 0)
-                          ? UniversalVariables.lightBlueColor
-                          : UniversalVariables.greyColor),
-                  title: Text(
-                    "Private",
-                    style: TextStyle(
-                        fontSize: _labelFontSize,
+                    icon: Icon(Icons.people,size: _labelFontSize,
                         color: (_page == 0)
                             ? UniversalVariables.lightBlueColor
-                            : Colors.grey),
-                  ),
-                ),
+                            : UniversalVariables.greyColor),
+                    label: "Private"
+                    // title: Text(
+                    //   "Private",
+                    //   style: TextStyle(
+                    //       fontSize: _labelFontSize,
+                    //       color: (_page == 0)
+                    //           ? UniversalVariables.lightBlueColor
+                    //           : Colors.grey),
+                    // ),
+                    ),
                 BottomNavigationBarItem(
                   icon: Icon(Icons.supervised_user_circle,
                       color: (_page == 1)
                           ? UniversalVariables.lightBlueColor
                           : UniversalVariables.greyColor),
-                  title: Text(
-                    "Public",
-                    style: TextStyle(
-                        fontSize: _labelFontSize,
-                        color: (_page == 1)
-                            ? UniversalVariables.lightBlueColor
-                            : Colors.grey),
-                  ),
+                  label: "Public",
+                  // title: Text(
+                  //   "Public",
+                  //   style: TextStyle(
+                  //       fontSize: _labelFontSize,
+                  //       color: (_page == 1)
+                  //           ? UniversalVariables.lightBlueColor
+                  //           : Colors.grey),
+                  // ),
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(Icons.account_circle,
                       color: (_page == 2)
                           ? UniversalVariables.lightBlueColor
                           : UniversalVariables.greyColor),
-                  title: Text(
-                    "Individual",
-                    style: TextStyle(
-                        fontSize: _labelFontSize,
-                        color: (_page == 2)
-                            ? UniversalVariables.lightBlueColor
-                            : Colors.grey),
-                  ),
+                  label: "Individual",
+                  // title: Text(
+                  //   "Individual",
+                  //   style: TextStyle(
+                  //       fontSize: _labelFontSize,
+                  //       color: (_page == 2)
+                  //           ? UniversalVariables.lightBlueColor
+                  //           : Colors.grey),
+                  // ),
                 ),
               ],
               onTap: navigationTapped,
               currentIndex: _page,
+              activeColor: UniversalVariables.lightBlueColor,
+              inactiveColor: Colors.grey,
+              iconSize: _labelFontSize,
             ),
           ),
         ),

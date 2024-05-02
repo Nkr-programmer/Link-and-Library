@@ -26,7 +26,7 @@ class UserCircle extends StatelessWidget {
  child:Stack(children: <Widget>[
    Align(
        alignment:Alignment.center,
-       child:Text(Utilities.getIntitials(userProvider.getUser.name),style:TextStyle(fontWeight: FontWeight.bold,color:UniversalVariables.lightBlueColor,fontSize: 13))
+       child:Text(Utilities.getIntitials(userProvider.getUser!.name),style:TextStyle(fontWeight: FontWeight.bold,color:UniversalVariables.lightBlueColor,fontSize: 13))
    ),
       Align(
        alignment:Alignment.bottomRight,

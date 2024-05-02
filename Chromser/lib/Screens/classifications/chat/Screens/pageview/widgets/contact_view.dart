@@ -23,7 +23,7 @@ class Contact_view extends StatelessWidget {
   return FutureBuilder<User>(future:_authMethods.getUserDetailsbyId(contact.uid)
   ,builder: (context,snapshot){
     if(snapshot.hasData){
-      User user = snapshot.data;
+      User user = User.fromMap(snapshot.data as Map<String, dynamic>);;
       return View_Layout(contact: user);
     }
      return Center(child: CircularProgressIndicator(),);
@@ -32,16 +32,16 @@ class Contact_view extends StatelessWidget {
   }
 // ignore: camel_case_types
 }  class View_Layout extends StatelessWidget {
-   final User contact;
+     User? contact;
 final ChatMethods _chatMethods= ChatMethods();
-  View_Layout({@required this.contact});
+  View_Layout({required this.contact});
    
     @override
     Widget build(BuildContext context) {
       final UserProvider userProvider= Provider.of<UserProvider>(context);
       return Container(
     child:  CustomTile( mini: false,
-            onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>ChatScreen(receiver:contact))),
+            onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>ChatScreen(receiver:contact, num: -1, text: '', work: '',))),
             title: Text(
               contact?.name??"..",
               style: TextStyle(
@@ -49,16 +49,16 @@ final ChatMethods _chatMethods= ChatMethods();
             ),
             subtitle: 
                LastMessageContainer(stream:
-                  _chatMethods.fetchLastMessagesBetween(senderId: userProvider.getUser.uid,
-                   receiverId: contact.uid),
+                  _chatMethods.fetchLastMessagesBetween(senderId: userProvider.getUser!.uid,
+                   receiverId: contact!.uid),
                            
             ),
             leading: Container(
               constraints: BoxConstraints(maxHeight: 60, maxWidth: 60),
               child: Stack(
                 children: <Widget>[
-                Cachedimage(contact.profilePhoto,isRound: true,radius:80),
-                OnlineDotIndicator(uid: contact.uid)
+                Cachedimage(contact!.profilePhoto,isRound: true,radius:80),
+                OnlineDotIndicator(uid: contact!.uid)
                 ],
               ),
             ),
