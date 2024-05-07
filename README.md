@@ -122,31 +122,18 @@ Some other features are also there like camera image, calling,video call, and em
 Now lets get back to home page how it will look with more subjects.
 
 <p float="left">
-<img src="https://github.com/Nkr-programmer/Link-and-Library/assets/55958579/fa406cbf-a8f2-419a-b9ef-18e47585cb46" width="300px" height="600px" />
-<img src="https://github.com/Nkr-programmer/Link-and-Library/assets/55958579/4b0e2a5e-e1d6-4f88-b102-68a0c1860c9a" width="300px" height="600px" />
-<img src="https://github.com/Nkr-programmer/Link-and-Library/assets/55958579/291f1754-7cd1-4d78-9fb0-3533e9873a53" width="300px" height="600px">
+<img src="https://github.com/Nkr-programmer/Link-and-Library/assets/55958579/850de7cd-2b6d-457d-9d08-a625e650a96e" width="300px" height="600px" />
+<img src="https://github.com/Nkr-programmer/Link-and-Library/assets/55958579/7b5e749a-5434-42c3-b12f-faf6dd9e5b8f" width="300px" height="600px" />
+<img src="https://github.com/Nkr-programmer/Link-and-Library/assets/55958579/7b867d3a-0433-4f34-aa4c-439e6b64d2f5" width="300px" height="600px">
 </p> 
 
+You can watch all of your private, public and individual subject at one place by going to individual and click on search button
 
-<p float="left">
-<img src="https://user-images.githubusercontent.com/55958579/114073350-d1723e00-98c0-11eb-8934-b464d54239c9.jpg" width="300px" height="600px" />
-<img src="https://user-images.githubusercontent.com/55958579/114073374-d800b580-98c0-11eb-8450-9da52b470a01.jpg" width="300px" height="600px">
-</p>
-<p float="left">
-<img src="https://user-images.githubusercontent.com/55958579/114073435-e64ed180-98c0-11eb-9ebc-9c106006a140.jpg" width="300px" height="600px" />
-<img src="https://user-images.githubusercontent.com/55958579/114073486-f49ced80-98c0-11eb-8de8-33b71f5cc578.jpg" width="300px" height="600px">
-</p>
-<p float="left">
-<img src="https://user-images.githubusercontent.com/55958579/114073570-11392580-98c1-11eb-8f52-92cd89d320b3.jpg" width="300px" height="600px" />
-<img src="https://user-images.githubusercontent.com/55958579/114073608-1ac28d80-98c1-11eb-9aa4-d2f248e54251.jpg" width="300px" height="600px">
-</p>
-<img src="https://user-images.githubusercontent.com/55958579/114073672-2a41d680-98c1-11eb-8678-c08960cf9020.jpg" width="300px" height="600px" >
+<img src="https://github.com/Nkr-programmer/Link-and-Library/assets/55958579/e4594359-1076-4df1-a880-91950104623c" width="300px" height="600px">
 
-This project is based on easy access to multiple apps and has a library
-which could be private, public or one to one end. With Google
-SignIn,Crud Operations on Firebase, Text Image Books can be
-Uploaded and Fetched(Filter can be Applied),StateManageMent By
-Provider(User iS ONLINE ,OFFLINE), Firebase is used for DataBase
-,Json Data is used ,Link Launching is used to access web View of
-applications. These sorts of things isLearned from this Project.
+Now finnaly to Sign Out click on your profile button at center to open sign out page
+
+<img src="https://github.com/Nkr-programmer/Link-and-Library/assets/55958579/cf474d21-ee15-420b-9e29-bcee92a2810d" width="300px" height="600px">
+
+Thank you
 
