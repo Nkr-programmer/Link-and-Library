@@ -135,5 +135,7 @@ Now finnaly to Sign Out click on your profile button at center to open sign out 
 
 <img src="https://github.com/Nkr-programmer/Link-and-Library/assets/55958579/cf474d21-ee15-420b-9e29-bcee92a2810d" width="300px" height="600px">
 
-Thank you
+So Thats All
+
+Thank you!!
 
